@@ -8,7 +8,8 @@ describe('validateEndBalance tests', () => {
         endBalance: 321,
         mutation: '+25',
         startBalance: 123,
-        transactionReference: '123312'
+        transactionReference: '123312',
+        description: ''
       })
     ).toBe(false);
   });
@@ -20,7 +21,8 @@ describe('validateEndBalance tests', () => {
         endBalance: 321,
         mutation: '-25',
         startBalance: 346,
-        transactionReference: '123312'
+        transactionReference: '123312',
+        description: ''
       })
     ).toBe(true);
   });
@@ -32,7 +34,8 @@ describe('validateEndBalance tests', () => {
         endBalance: 321,
         mutation: '0',
         startBalance: 321,
-        transactionReference: '123312'
+        transactionReference: '123312',
+        description: ''
       })
     ).toBe(true);
   });
@@ -44,7 +47,8 @@ describe('validateEndBalance tests', () => {
         endBalance: 321,
         mutation: '0',
         startBalance: 326,
-        transactionReference: '123312'
+        transactionReference: '123312',
+        description: ''
       })
     ).toBe(false);
   });

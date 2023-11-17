@@ -4,5 +4,5 @@ export interface CustomerStatementRecord {
   startBalance: number;
   mutation: string;
   endBalance: number;
-  description?: string;
+  description: string;
 }
