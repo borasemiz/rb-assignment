@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { CustomerStatementRecord } from "@/model/CustomerStatementRecord";
 import { RawCustomerStatementRecord } from "@/model/RawCustomerStatementRecord";
 import { FormatError } from './errors/FormatError';
-import { ValidationError } from './errors/ValidationError';
+import { ProcessingError } from './errors/ProcessingError';
 
 interface ValidateFieldParams {
   fieldName: string;
@@ -70,7 +70,7 @@ function validateRecord({ accountNumber, description, endBalance, mutation, star
   ].filter((error): error is FormatError => error !== undefined);
 
   if (errors.length > 0) {
-    throw new ValidationError(errors);
+    throw new ProcessingError(errors);
   }
 }
 
