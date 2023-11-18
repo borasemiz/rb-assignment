@@ -1,10 +1,9 @@
 import { CSVCustomerStatementRecordParser } from "./CSVCustomerStatementRecordParser";
 import { CustomerStatementRecordParser } from "./CustomerStatementRecordParser";
 
-const XML_FILE_TYPE = 'application/xml';
 const CSV_FILE_TYPE = 'text/csv';
 
-export class ParserFactory {
+export class CustomerStatementRecordParserFactory {
   public static fromFile(file: File): CustomerStatementRecordParser {
     switch (file.type) {
       case CSV_FILE_TYPE:
