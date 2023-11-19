@@ -10,5 +10,23 @@ export abstract class FileCustomerStatementRecordParser implements CustomerState
     this.fileReader = file.stream().pipeThrough(new TextDecoderStream()).getReader();
   }
 
-  public abstract loadRecords(): Observable<RawCustomerStatementRecord>;
+  public loadRecords(): Observable<RawCustomerStatementRecord> {
+    this.startLoading();
+    return this.recordStream$$.asObservable();
+  }
+
+  protected async startLoading() {
+    while (true) {
+      const { value, done } = await this.fileReader.read();
+      if (done || value === undefined) {
+        this.closeStream();
+        break;
+      }
+
+      if (!this.tryParsingNextChunk(value)) break;
+    }
+  }
+
+  protected abstract tryParsingNextChunk(chunk: string): Promise<boolean>;
+  protected abstract closeStream(): void;
 }

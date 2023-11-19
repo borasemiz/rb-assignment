@@ -35,24 +35,7 @@ export class CSVCustomerStatementRecordParser extends FileCustomerStatementRecor
     }));
   }
 
-  public loadRecords(): Observable<RawCustomerStatementRecord> {
-    this.startLoading();
-    return this.recordStream$$.asObservable();
-  }
-
-  private async startLoading() {
-    while (true) {
-      const { value, done } = await this.fileReader.read();
-      if (done || value === undefined) {
-        this.closeStream();
-        break;
-      }
-
-      if (!this.tryParsingNextChunk(value)) break;
-    }
-  }
-
-  private async tryParsingNextChunk(value: string): Promise<boolean> {
+  protected async tryParsingNextChunk(value: string): Promise<boolean> {
     try {
       await this.csvParser.process(value);
     } catch (e) {
@@ -63,7 +46,7 @@ export class CSVCustomerStatementRecordParser extends FileCustomerStatementRecor
     return true;
   }
 
-  private closeStream() {
+  protected closeStream() {
     try {
       this.csvParser.flush();
       this.recordStream$$.complete();
