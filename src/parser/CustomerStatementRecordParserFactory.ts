@@ -1,6 +1,8 @@
 import { CSVCustomerStatementRecordParser } from "./CSVCustomerStatementRecordParser";
 import { CustomerStatementRecordParser } from "./CustomerStatementRecordParser";
+import { XMLCustomerStatementRecordParser } from "./XMLCustomerStatementRecordParser";
 
+const XML_FILE_TYPE = 'application/xml';
 const CSV_FILE_TYPE = 'text/csv';
 
 export class CustomerStatementRecordParserFactory {
@@ -8,6 +10,8 @@ export class CustomerStatementRecordParserFactory {
     switch (file.type) {
       case CSV_FILE_TYPE:
         return new CSVCustomerStatementRecordParser(file);
+      case XML_FILE_TYPE:
+        return new XMLCustomerStatementRecordParser(file);
     }
 
     throw new Error(`parser for file type '${file.type}' is not implemented`);
