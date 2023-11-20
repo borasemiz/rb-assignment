@@ -3,6 +3,7 @@ import { CustomerStatementRecordParser } from "./CustomerStatementRecordParser";
 import { XMLCustomerStatementRecordParser } from "./XMLCustomerStatementRecordParser";
 
 const XML_FILE_TYPE = 'application/xml';
+const XML_ALTERNATIVE_FILE_TYPE = 'text/xml';
 const CSV_FILE_TYPE = 'text/csv';
 
 export class CustomerStatementRecordParserFactory {
@@ -11,6 +12,7 @@ export class CustomerStatementRecordParserFactory {
       case CSV_FILE_TYPE:
         return new CSVCustomerStatementRecordParser(file);
       case XML_FILE_TYPE:
+      case XML_ALTERNATIVE_FILE_TYPE:
         return new XMLCustomerStatementRecordParser(file);
     }
 

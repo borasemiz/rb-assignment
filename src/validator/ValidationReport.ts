@@ -1,7 +1,7 @@
 import { RawCustomerStatementRecord } from "@/model/RawCustomerStatementRecord";
 
 export interface ValidationReport {
-  rawRecord?: RawCustomerStatementRecord;
+  rawRecord: RawCustomerStatementRecord;
   errors: Error[];
 }
 
